@@ -1,0 +1,12 @@
+services:
+  generic-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: generic-mcp-server:local
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+      - "8081:8081"
+    restart: unless-stopped

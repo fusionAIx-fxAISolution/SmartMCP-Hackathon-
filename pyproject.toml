@@ -1,0 +1,28 @@
+[project]
+name = "generic-mcp-server-scaffold"
+version = "0.1.0"
+description = "Bare-bones Python MCP server scaffold with optional Entra inbound auth"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "mcp",
+  "httpx>=0.27.0",
+  "pyjwt[crypto]>=2.8.0",
+  "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "ruff>=0.8.0",
+]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["app", "app.tools"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
