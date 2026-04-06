@@ -9,7 +9,7 @@ def _env(name: str, default: str | None = None, required: bool = False) -> str:
     if required and not value:
         raise ValueError(f"Missing required environment variable: {name}")
     return value or ""
-
+# test for github
 
 @dataclass(frozen=True)
 class Settings:
