@@ -33,7 +33,7 @@ class PegaSettings:
  
     @classmethod
     def from_env(cls) -> "PegaSettings":
-        base_url = _env("PEGA_BASE_URL", required=True).rstrip("/")
+        base_url = _env("pega-base-url", required=True).rstrip("/")
         application_api_base = _env(
             "PEGA_APPLICATION_API_BASE",
             f"{base_url}/prweb/api/application/v2",
