@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import base64
+import binascii
 from typing import Any
 
 import httpx
@@ -34,6 +36,33 @@ class PegaCaseClient:
             "/cases",
             params=self._compact_params({"viewType": view_type, "pageName": page_name}),
             headers_extra=self._compact_headers({"x-origin-channel": origin_channel}),
+            json=payload,
+        )
+
+    async def add_attachment(
+        self,
+        case_id: str,
+        file_name: str,
+        file_content: str,
+        content_type: str = "application/octet-stream",
+    ) -> dict[str, Any]:
+        if not file_content:
+            raise ValueError("file_content must not be empty")
+
+        try:
+            base64.b64decode(file_content, validate=True)
+        except binascii.Error as exc:
+            raise ValueError("file_content must be valid base64") from exc
+
+        payload = {
+            "fileName": file_name,
+            "contentType": content_type,
+            "fileBody": file_content,
+        }
+
+        return await self._request_json(
+            "POST",
+            f"/cases/{case_id}/attachments",
             json=payload,
         )
  

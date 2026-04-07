@@ -12,6 +12,7 @@ from app.health_server import start_health_server
 from app.PegaSettings import PegaSettings
 from app.Tokenhelper import PegaTokenHelper
 from app.pega_client import PegaCaseClient
+from app.tools.PegaAttachment import register_pega_attachment_tool
 from app.tools.PegaCreateCase import register_pega_create_case_tool
 
 def _build_auth_kwargs(settings: Settings) -> dict[str, Any]:
@@ -74,6 +75,7 @@ def build_server(settings: Settings) -> FastMCP:
 
     # Register Pega tools
     register_pega_create_case_tool(mcp, pega_client, pega_settings)
+    register_pega_attachment_tool(mcp, pega_client, pega_settings)
 
     return mcp
 
